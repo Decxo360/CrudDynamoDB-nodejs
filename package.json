@@ -2,10 +2,9 @@
   "name": "crud-dynamo-nodejs",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon --experimental-modules --es-module-specifier-resolution=node index.js"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.350.0",
