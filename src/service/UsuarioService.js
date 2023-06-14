@@ -1,3 +1,4 @@
+import { v4 } from "uuid";
 import { client } from "../config/config.js"
 import { ScanCommand, PutItemCommand, DeleteItemCommand } from "@aws-sdk/client-dynamodb"
 
@@ -17,15 +18,25 @@ class UsuarioService{
         return result
         
     }
-    async createUsario(data){
+    async createUsuario(data){
+        
         const params ={
             TableName:"Usuario",
-            Item: data
+            Item: {
+                idUsuario: {S:v4()},
+                nombre: {S:data.nombre},
+                apellido:{S:data.apellido},
+                email:{S:data.email},
+                contrasena:{S:data.contrasena},
+                nick:{S:data.nick}
+            }
         }
         const command = new PutItemCommand(params)
         const result = await client.send(command)
+        console.log(result);
         return result
     }
+
     async deleteUsuario(id){
         const params = {
             TableName:"Usuario",
