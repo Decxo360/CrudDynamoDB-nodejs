@@ -13,5 +13,20 @@ export const UsuarioController = {
             }
         )
     },
+    register: async(req,res)=>{
+        const {nombre,apellido,email,contrasena,nick} = req.body
+        try{
+            const result = await service.createUsuario({nombre,apellido,email,contrasena,nick})
+            return res.status(200).json({
+                success:true,
+                data: result
+            })
+        }catch (e){
+            return res.status(400).json({
+                success:false,
+                err:e
+            })
+        }
+    }
 }
 
